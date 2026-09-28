@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function Home({
   setPage,
   setSelectedFreelancer,
@@ -13,7 +16,7 @@ function Home({
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/freelancers")
+    fetch(`${API_URL}/api/auth/freelancers`)
       .then((response) => response.json())
       .then((data) => setFreelancers(data))
       .catch((error) =>
@@ -22,7 +25,7 @@ function Home({
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/gigs")
+    fetch(`${API_URL}/api/gigs`)
       .then((response) => response.json())
       .then((data) => setGigs(data))
       .catch((error) =>
@@ -37,7 +40,7 @@ function Home({
       for (const freelancer of freelancers) {
         try {
           const response = await fetch(
-            `http://localhost:5000/api/reviews/freelancer/${freelancer._id}`
+            `${API_URL}/api/reviews/freelancer/${freelancer._id}`
           );
 
           const data = await response.json();

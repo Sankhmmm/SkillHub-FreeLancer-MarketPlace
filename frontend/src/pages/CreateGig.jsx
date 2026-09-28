@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function CreateGig({ setPage }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id || user?._id;
@@ -30,7 +33,7 @@ function CreateGig({ setPage }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/gigs",
+  `${API_URL}/api/gigs`,
         {
           method: "POST",
           headers: {

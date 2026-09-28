@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function ClientDashboard({ setPage }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id || user?._id;
@@ -16,7 +19,7 @@ function ClientDashboard({ setPage }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/client/${userId}`
+        `${API_URL}/api/orders/client/${userId}`
       );
 
       const data = await response.json();
@@ -44,7 +47,7 @@ function ClientDashboard({ setPage }) {
   const handleCancel = async (orderId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${API_URL}/api/orders/${orderId}/status`,
         {
           method: "PUT",
           headers: {
@@ -97,7 +100,7 @@ function ClientDashboard({ setPage }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/reviews",
+        `${API_URL}/api/reviews`,
         {
           method: "POST",
           headers: {

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function GigDetails({
   gigId,
   setPage,
@@ -12,7 +15,7 @@ function GigDetails({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/gigs/${gigId}`)
+    fetch(`${API_URL}/api/gigs/${gigId}`)
       .then((response) => response.json())
       .then((data) => setGig(data))
       .catch((error) => {
@@ -44,7 +47,7 @@ function GigDetails({
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/orders",
+  `${API_URL}/api/orders`,
         {
           method: "POST",
           headers: {

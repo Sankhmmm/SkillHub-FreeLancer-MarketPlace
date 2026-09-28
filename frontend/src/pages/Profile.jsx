@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function Profile({ setPage }) {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -23,7 +26,7 @@ function Profile({ setPage }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/profile/${userId}`,
+  `${API_URL}/api/auth/profile/${userId}`,
         {
           method: "PUT",
           headers: {

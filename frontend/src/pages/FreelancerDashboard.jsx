@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function FreelancerDashboard({ setPage }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id || user?._id;
@@ -12,7 +15,7 @@ function FreelancerDashboard({ setPage }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/freelancer/${userId}`
+        `${API_URL}/api/orders/freelancer/${userId}`
       );
 
       const data = await response.json();
@@ -40,7 +43,7 @@ function FreelancerDashboard({ setPage }) {
   const updateOrderStatus = async (orderId, status) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${API_URL}/api/orders/${orderId}/status`,
         {
           method: "PUT",
           headers: {

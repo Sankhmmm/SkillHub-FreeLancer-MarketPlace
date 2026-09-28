@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function PublicProfile({ freelancerId, setPage }) {
   const [freelancer, setFreelancer] = useState(null);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/auth/profile/${freelancerId}`
+  `${API_URL}/api/auth/profile/${freelancerId}`
+
     )
       .then((response) => response.json())
       .then((data) => setFreelancer(data))
@@ -15,8 +19,8 @@ function PublicProfile({ freelancerId, setPage }) {
       );
 
     fetch(
-      `http://localhost:5000/api/reviews/freelancer/${freelancerId}`
-    )
+  `${API_URL}/api/reviews/freelancer/${freelancerId}`
+)
       .then((response) => response.json())
       .then((data) => setReviews(data))
       .catch((error) =>
